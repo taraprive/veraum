@@ -7,3 +7,6 @@ data/
 *.log
 forward_signals.jsonl
 mt5_bars.jsonl
+
+# generated track-record site (derived from the journals in build/)
+site/
