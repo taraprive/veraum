@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Veraum â€” Verifiable Track Record</title>
+<meta property="og:title" content="Veraum â€” Verifiable Track Record">
+<meta property="og:description" content="Every signal, wins and losses, bound into a SHA-256 hash chain â€” independently verifiable. Not financial advice.">
+<link rel="icon" type="image/png" href="favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:image" content="og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Veraum â€” Verifiable Track Record">
+<meta name="twitter:description" content="Every signal, wins and losses, bound into a SHA-256 hash chain â€” independently verifiable. Not financial advice.">
+<meta name="twitter:image" content="og-image.png">
+<style>
+  body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:900px;margin:2rem auto;padding:0 1rem;color:#1c1c1e;background:#fff}
+  h1{font-size:1.5rem} .ledger{background:#f4f4f6;border:1px solid #ddd;padding:1rem;border-radius:8px;font-size:.9rem}
+  .mono{font-family:monospace;font-size:.75rem;color:#666}
+  table{border-collapse:collapse;width:100%;margin-top:1rem}
+  th,td{border:1px solid #e0e0e0;padding:.4rem .5rem;text-align:left;font-size:.85rem}
+  th{background:#fafafa} tr.win td{background:#e9f7ef} tr.loss td{background:#fdeeee}
+  tr.open td{background:#fbf6ec} .head{font-size:.8rem;color:#555}
+  .proof img{max-width:100%;border:1px solid #ddd;border-radius:8px;margin-top:.5rem}
+  .copy{font-family:monospace;font-size:.8rem;background:#f4f4f6;padding:.5rem;border-radius:6px}
+</style></head><body>
+<nav style="margin-bottom:1rem"><a href="index.html" style="color:#1c1c1e;text-decoration:none;font-weight:600">&larr; Veraum</a></nav>
+<div class="proof">
+  <a href="proof-summary.svg"><img src="proof-summary.svg" alt="Veraum verified track record"></a>
+  <p class="copy">Veraum â€” a live, verifiable gold/silver/Nasdaq signal track record. Wins and losses, on-chain.</p>
+  <p><small>Share this proof card, or download proof-summary.svg</small></p>
+</div>
+<h1>Veraum&nbsp;&mdash; Verifiable Track Record</h1>
+<p>Every signal this engine emitted, wins and losses, bound into a SHA-256 hash
+chain so nothing can be edited or deleted retroactively. Download
+<a href="trackrecord.json">trackrecord.json</a> and re-run
+<code>tools/track_record.py</code> on the raw journal to verify
+<code>chain_head</code> yourself.</p>
+<div class="ledger">
+  <b>Chain head:</b> <span class="mono">b5ed7df921e8b6397de8ff418a794b93422425bc4f2feeb0ff287f1c182cf478</span><br>
+  <b>3</b> signals emitted &middot; <b>0</b> resolved
+  &middot; <b>0</b> wins &middot;
+  <b>0</b> losses
+</div>
+<h2>Summary by instrument</h2>
+<table><thead><tr><th>Instrument</th><th>Emitted</th><th>Wins</th><th>Losses</th>
+<th>Open</th><th>Win rate (resolved)</th><th>Avg R (resolved)</th></tr></thead>
+<tbody><tr><td><b>NDX100</b></td><td>2</td><td>0</td><td>0</td><td>2</td><td>0.0%</td><td>+0.00R</td></tr><tr><td><b>XAUUSD</b></td><td>1</td><td>0</td><td>0</td><td>1</td><td>0.0%</td><td>+0.00R</td></tr></tbody></table>
+<h2>Signals (newest first)</h2>
+<table><thead><tr><th>#</th><th>Instrument</th><th>Side</th><th>Entry</th><th>Stop</th>
+<th>Target</th><th>Outcome</th><th>R</th><th>Hash</th></tr></thead>
+<tbody><tr class="open"><td>1</td><td>NDX100</td><td>SHORT</td><td>$29,362.6</td><td>$29,460.2</td><td>$29,216.1</td><td>OPEN</td><td></td><td class="mono" title="b5ed7df921e8b6397de8ff418a794b93422425bc4f2feeb0ff287f1c182cf478">b5ed7df921e8&hellip;</td></tr><tr class="open"><td>2</td><td>NDX100</td><td>SHORT</td><td>$29,348.0</td><td>$29,471.1</td><td>$29,163.4</td><td>OPEN</td><td></td><td class="mono" title="5b10da7a28279ea1447510cb54e4cc6b09e420eb351918f434a11475b8928a30">5b10da7a2827&hellip;</td></tr><tr class="open"><td>3</td><td>XAUUSD</td><td>LONG</td><td>$4,455.4</td><td>$4,411.4</td><td>$4,521.4</td><td>OPEN</td><td></td><td class="mono" title="f0e486d2477a6bd56cec797dca2009618b52b6cf9182faa2bcb642cc6256ca25">f0e486d2477a&hellip;</td></tr></tbody></table>
+<p class="head">Honesty policy: we publish losses as openly as wins. Outcomes
+resolve stop-first on same-bar conflicts; entry at signal close. This is
+decision-support data, not financial advice. We never guarantee profit.</p>
+</body></html>

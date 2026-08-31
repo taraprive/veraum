@@ -1,0 +1,61 @@
+{
+  "chain_head": "b5ed7df921e8b6397de8ff418a794b93422425bc4f2feeb0ff287f1c182cf478",
+  "entries": [
+    {
+      "entry": 4455.39,
+      "hash": "f0e486d2477a6bd56cec797dca2009618b52b6cf9182faa2bcb642cc6256ca25",
+      "instrument": "XAUUSD",
+      "outcome": "open",
+      "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "side": "LONG",
+      "stop": 4411.39,
+      "target": 4521.38,
+      "ts": 1788201177730
+    },
+    {
+      "entry": 29348.0,
+      "hash": "5b10da7a28279ea1447510cb54e4cc6b09e420eb351918f434a11475b8928a30",
+      "instrument": "NDX100",
+      "outcome": "open",
+      "prev_hash": "f0e486d2477a6bd56cec797dca2009618b52b6cf9182faa2bcb642cc6256ca25",
+      "side": "SHORT",
+      "stop": 29471.1,
+      "target": 29163.4,
+      "ts": 1788201177731
+    },
+    {
+      "entry": 29362.6,
+      "hash": "b5ed7df921e8b6397de8ff418a794b93422425bc4f2feeb0ff287f1c182cf478",
+      "instrument": "NDX100",
+      "outcome": "open",
+      "prev_hash": "5b10da7a28279ea1447510cb54e4cc6b09e420eb351918f434a11475b8928a30",
+      "side": "SHORT",
+      "stop": 29460.2,
+      "target": 29216.1,
+      "ts": 1788202354689
+    }
+  ],
+  "entry_count": 3,
+  "generated_at": "2026-08-31T18:53:48.534391Z",
+  "method": "Each entry is bound into a SHA-256 chain: hash(i) = sha256(hash(i-1) + canonical(entry)). Re-running tools/track_record.py on the raw journal must reproduce chain_head. Outcomes resolve stop-first on same-bar conflict; entry at signal close. Not financial advice.",
+  "resolved_count": 0,
+  "summary": {
+    "NDX100": {
+      "avg_r_resolved": 0.0,
+      "emitted": 2,
+      "losses": 0,
+      "open": 2,
+      "win_rate_resolved": 0.0,
+      "wins": 0
+    },
+    "XAUUSD": {
+      "avg_r_resolved": 0.0,
+      "emitted": 1,
+      "losses": 0,
+      "open": 1,
+      "win_rate_resolved": 0.0,
+      "wins": 0
+    }
+  },
+  "win_count": 0
+}

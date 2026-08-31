@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Veraum â€” Verifiable Gold, Silver &amp; Nasdaq Signals</title>
+<meta name="description" content="Live gold (XAU), silver (XAG) and Nasdaq (NDX) trade signals you can actually verify. Every signal, win or loss, is bound into a tamper-evident SHA-256 chain you can audit yourself. Free to follow. Not financial advice.">
+<link rel="canonical" href="https://taraprive.github.io/veraum/">
+<meta property="og:title" content="Veraum â€” Signals you can verify, not just trust">
+<meta property="og:description" content="Live gold/silver/Nasdaq signals with a fully transparent, hash-chained track record. Not financial advice.">
+<link rel="icon" type="image/png" href="favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:image" content="og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Veraum â€” Verifiable Market Signals">
+<meta name="twitter:description" content="Live gold/silver/Nasdaq signals with a fully transparent, hash-chained track record. Not financial advice.">
+<meta name="twitter:image" content="og-image.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"Veraum","slogan":"Recorded. Not promised.","description":"Verifiable gold, silver and Nasdaq trade signals with a tamper-evident hash-chained track record.","areaServed":"Worldwide"}
+</script>
+<style>
+  :root{--gold:#D4AF37;--navy:#0F1420;--ink:#1a1f2a;--soft:#8A93A3;--line:#e5e8ef;--bg:#fafbfd;--emerald:#22C55E;--red:#EF4444}
+  *{box-sizing:border-box} html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;margin:0;color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .top{background:var(--navy);color:#fff;padding:1rem 0}
+  .top .wrap{display:flex;align-items:center;gap:1rem}
+  .brand{display:flex;align-items:center;gap:.6rem;font-weight:700;letter-spacing:.5px}
+  .brand .seal{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;font-weight:800;color:var(--gold);border:1.5px solid var(--gold)}
+  .nav a{color:#c7ccd6;text-decoration:none;margin-left:1.2rem;font-size:.9rem}
+  .nav a:hover{color:#fff}
+  .wrap{max-width:920px;margin:0 auto;padding:0 1.25rem}
+  header.hero{padding:3.5rem 0 2.5rem;background:var(--navy);color:#fff}
+  .eyebrow{display:inline-block;color:var(--gold);letter-spacing:2px;font-size:.78rem;text-transform:uppercase;font-weight:600}
+  h1{font-size:clamp(1.8rem,5vw,2.9rem);line-height:1.15;margin:.8rem 0 1rem;font-weight:800}
+  h1 u{text-decoration-color:var(--gold);text-decoration-thickness:4px;text-underline-offset:6px}
+  .sub{font-size:1.12rem;color:#c7ccd6;max-width:56ch;margin:0 0 1.6rem}
+  .btns{display:flex;gap:.8rem;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--gold);color:var(--navy);font-weight:700;padding:.85rem 1.5rem;border-radius:10px;text-decoration:none;font-size:1rem;transition:filter .15s}
+  .btn:hover{filter:brightness(1.06)}
+  .btn.ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.35)}
+  .btn.ghost:hover{border-color:#fff}
+  .btn-off{background:#3a4150;color:#aab;cursor:not-allowed}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.8rem;margin-top:2rem}
+  .stat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:1rem;text-align:center}
+  .stat b{display:block;font-size:1.35rem;color:#fff}
+  .stat span{color:var(--soft);font-size:.8rem}
+  section{padding:3rem 0}
+  h2{font-size:1.6rem;margin:0 0 1.4rem}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:1.4rem}
+  .card .n{color:var(--gold);font-weight:800;font-size:.85rem;letter-spacing:1px}
+  .card h3{margin:.4rem 0 .4rem}
+  .card p{margin:0;color:#555;font-size:.95rem}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;counter-reset:step}
+  .step{background:#fff;border:1px solid var(--line);border-radius:14px;padding:1.3rem}
+  .step::before{counter-increment:step;content:counter(step);font-weight:800;color:var(--gold);font-size:1.2rem}
+  .step h3{margin:.4rem 0 .3rem}
+  .step p{margin:0;color:#555;font-size:.95rem}
+  details.faq{background:#fff;border:1px solid var(--line);border-radius:12px;margin-bottom:.7rem;padding:.9rem 1.1rem}
+  details.faq summary{cursor:pointer;font-weight:600}
+  details.faq p{margin:.6rem 0 0;color:#555}
+  .nfa{font-size:.85rem;color:#777}
+  .muted{color:#777}
+  footer{background:var(--navy);color:#c7ccd6;padding:2rem 0 3rem;font-size:.85rem}
+  footer a{color:var(--gold);text-decoration:none}
+  .row{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .band{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.8rem}
+  @media(max-width:560px){.nav{display:none} .wrap{padding:0 1rem} .btns .btn{width:100%;justify-content:center}}
+</style>
+</head>
+<body>
+<div class="top"><div class="wrap">
+  <div class="brand"><span class="seal">V</span>VERAUM</div>
+  <div class="nav"><a href="#why">Why</a><a href="#how">How it works</a><a href="#faq">FAQ</a><a href="track.html">Track record</a></div>
+</div></div>
+
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">Verifiable market signals</div>
+  <h1>Signals you can <u>verify</u>, not just trust.</h1>
+  <p class="sub">Live gold (XAU), silver (XAG) and Nasdaq (NDX) trade signals &mdash; each with entry, stop, target and lot size, plus the reasoning. Every signal, <b>win or loss</b>, is published into a tamper-evident SHA-256 chain you can audit yourself.</p>
+  <div class="btns"><a class="btn" href="https://t.me/verum_signals">Join the free channel &#8594;</a><a class="btn ghost" href="track.html">View the public record &#8594;</a></div>
+  <div class="stats"><div class="stat"><b>XAU</b><span>gold</span></div><div class="stat"><b>XAG</b><span>silver</span></div><div class="stat"><b>NDX</b><span>Nasdaq</span></div><div class="stat"><b>100%</b><span>on-chain</span></div></div>
+</div></header>
+
+<section id="why" class="band"><div class="wrap">
+<h2>Why this is different</h2>
+<div class="grid">
+  <div class="card"><div class="n">01</div><h3>A record you can check, not a screenshot</h3>
+  <p>Anyone can photoshop a P&amp;L. We bind every signal into a hash chain &mdash; re-download the raw data and re-run our tool; if one stop were edited, the chain breaks.</p></div>
+  <div class="card"><div class="n">02</div><h3>Losses published as openly as wins</h3>
+  <p>No cherry-picking. Every single signal ships to the ledger, honest results included. Honesty is the product.</p></div>
+  <div class="card"><div class="n">03</div><h3>No paid hype feed</h3>
+  <p>Free while we prove out the record, so the numbers speak for themselves before anything is ever monetized.</p></div>
+</div>
+</div></section>
+
+<section id="how"><div class="wrap">
+<h2>How it works</h2>
+<div class="steps">
+  <div class="step"><h3>Follow the channel</h3><p>Join the free Telegram channel to receive signals as our engine publishes them.</p></div>
+  <div class="step"><h3>Read each signal</h3><p>Entry, stop, target and lot size are shown with the reasoning. Message the bot and type /signals for a guide.</p></div>
+  <div class="step"><h3>Audit the record</h3><p>Every result lands on a public, hash-chained ledger you can verify with one command.</p></div>
+</div>
+<div class="btns" style="margin-top:1.8rem"><a class="btn" href="https://t.me/verum_signals">Join the free channel &#8594;</a></div>
+</div></section>
+
+<section id="faq" class="band"><div class="wrap">
+<h2>Questions, answered</h2>
+<details class="faq"><summary>Is this free?</summary><p>Yes. The channel is free to follow while we build a real, auditable track record. Nothing is sold until the record proves itself.</p></details>
+<details class="faq"><summary>How can I trust the record?</summary><p>Every signal is written to an append-only journal and bound into a SHA-256 chain. The published chain head is verifiable: anyone can re-run our open tool on the raw data and check it still matches. If a single entry were edited or dropped, every later hash changes.</p></details>
+<details class="faq"><summary>Is this financial advice?</summary><p>No. These are decision-support signals with clear risk levels. We never guarantee profit and losses are part of the public record. Trade decisions are always yours.</p></details>
+<details class="faq"><summary>What markets do you cover?</summary><p>Gold (XAUUSD), silver (XAGUSD) and the Nasdaq 100 (NDX100), using H1 trend signals with defined stop and target levels.</p></details>
+<details class="faq"><summary>Do I need the bot?</summary><p>No &mdash; signals post straight to the channel. The bot adds a guided welcome (type /start) and explains the signal format (/signals).</p></details>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="row">
+    <div class="brand"><span class="seal">V</span>VERAUM</div>
+    <div><a href="track.html">Public track record</a> &middot; <a href="https://t.me/verum_signals">Channel</a></div>
+  </div>
+  <p class="nfa" style="margin-top:1.2rem">Veraum provides decision-support data, not financial advice. We never guarantee profit. Losses are part of the published record. &copy; Veraum. All rights reserved.</p>
+</div></footer>
+<!-- GoatCounter (free, privacy-friendly) -->
+<script data-goatcounter="https://veraum.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body></html>
