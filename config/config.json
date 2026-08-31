@@ -1,0 +1,247 @@
+{
+  "allocator": {
+    "check_interval_sec": 1,
+    "window_sec": 15,
+    "capital_buffer": 1.0,
+    "min_opp_rate": 0.0
+  },
+  "rebalance": {
+    "interval_sec": 0,
+    "threshold_usd": 2.0,
+    "max_sweep_usd": 5000.0,
+    "transfer_cost_bp": 0.0
+  },
+  "market": {
+    "vol_bp": 0.6,
+    "drift_bp": 0.0,
+    "basis_vol_bp": 0.9,
+    "basis_reversion": 0.08,
+    "spread_min_bp": 1.0,
+    "spread_max_bp": 4.0,
+    "spread_walk_bp": 0.25,
+    "burst_probability": 0.015,
+    "burst_bp": 60.0,
+    "burst_min_ticks": 1,
+    "burst_max_ticks": 4
+  },
+  "strategy": {
+    "safety_margin": 0.0,
+    "min_net_spread": 0.0,
+    "network_cost_spot": 0.0
+  },
+  "liquidity": {
+    "min_available_ratio": 0.1,
+    "max_slippage": 0.005
+  },
+  "risk": {
+    "max_data_age_ms": 1000,
+    "max_round_trip_latency_ms": 500,
+    "min_trade_qty": 0.00001,
+    "max_trade_qty": 100.0,
+    "max_open_exposure": 2000.0,
+    "cooldown_ms": 200,
+    "max_trades_per_minute": 300,
+    "max_session_drawdown_pct": 0.0
+  },
+  "paper": {
+    "fill_rate_buy": 0.97,
+    "fill_rate_sell": 0.93,
+    "partial_probability": 0.05,
+    "reject_probability": 0.01,
+    "delay_ms": 20.0,
+    "price_move_bp": 0.5,
+    "adverse_edge_frac": 0.35
+  },
+  "watchdog": {
+    "heartbeat_timeout_ms": 5000,
+    "check_interval_ms": 1000,
+    "max_reconnect_attempts": 5
+  },
+  "ops": {
+    "log_file": "logs/bot.log",
+    "log_level": "info",
+    "run_seconds": 0,
+    "feed_seed": 42,
+    "state_file": "data/balances.json"
+  },
+  "symbols": [
+    {
+      "name": "BTC/USDT",
+      "trade_quantity": 0.01,
+      "base_price": 79000.0,
+      "liquidity_top_qty": 0.5,
+      "exchanges": ["binance", "okx"]
+    },
+    {
+      "name": "ETH/USDT",
+      "trade_quantity": 0.2,
+      "base_price": 2520.0,
+      "liquidity_top_qty": 5.0,
+      "exchanges": ["binance", "okx"]
+    },
+    {
+      "name": "SOL/USDT",
+      "trade_quantity": 10.0,
+      "base_price": 96.0,
+      "liquidity_top_qty": 200.0,
+      "exchanges": ["binance", "okx"]
+    },
+    {
+      "name": "XRP/USDT",
+      "trade_quantity": 1000.0,
+      "base_price": 1.48,
+      "liquidity_top_qty": 5000.0,
+      "exchanges": ["binance", "okx"]
+    },
+    {
+      "name": "DOGE/USDT",
+      "trade_quantity": 5000.0,
+      "base_price": 0.089,
+      "liquidity_top_qty": 50000.0,
+      "exchanges": ["binance", "okx"]
+    },
+    {
+      "name": "ADA/USDT",
+      "trade_quantity": 1000.0,
+      "base_price": 0.22,
+      "liquidity_top_qty": 5000.0,
+      "exchanges": ["binance", "okx"]
+    },
+    {
+      "name": "LINK/USDT",
+      "trade_quantity": 20.0,
+      "base_price": 11.55,
+      "liquidity_top_qty": 100.0,
+      "exchanges": ["binance", "okx"]
+    },
+    {
+      "name": "AVAX/USDT",
+      "trade_quantity": 30.0,
+      "base_price": 7.54,
+      "liquidity_top_qty": 100.0,
+      "exchanges": ["binance", "okx"]
+    },
+    {
+      "name": "DOT/USDT",
+      "trade_quantity": 200.0,
+      "base_price": 0.90,
+      "liquidity_top_qty": 1000.0,
+      "exchanges": ["binance", "okx"]
+    },
+    {
+      "name": "UNI/USDT",
+      "trade_quantity": 50.0,
+      "base_price": 4.28,
+      "liquidity_top_qty": 200.0,
+      "exchanges": ["binance", "okx"]
+    },
+    {
+      "name": "LTC/USDT",
+      "trade_quantity": 5.0,
+      "base_price": 51.65,
+      "liquidity_top_qty": 50.0,
+      "exchanges": ["binance", "okx"]
+    },
+    {
+      "name": "NEAR/USDT",
+      "trade_quantity": 200.0,
+      "base_price": 1.95,
+      "liquidity_top_qty": 500.0,
+      "exchanges": ["binance", "okx"]
+    },
+    {
+      "name": "SUI/USDT",
+      "trade_quantity": 300.0,
+      "base_price": 0.80,
+      "liquidity_top_qty": 1000.0,
+      "exchanges": ["binance", "okx"]
+    },
+    {
+      "name": "FIL/USDT",
+      "trade_quantity": 200.0,
+      "base_price": 0.75,
+      "liquidity_top_qty": 500.0,
+      "exchanges": ["binance", "okx"]
+    },
+    {
+      "name": "APT/USDT",
+      "trade_quantity": 100.0,
+      "base_price": 0.61,
+      "liquidity_top_qty": 500.0,
+      "exchanges": ["binance", "okx"]
+    },
+    {
+      "name": "ATOM/USDT",
+      "trade_quantity": 100.0,
+      "base_price": 1.54,
+      "liquidity_top_qty": 500.0,
+      "exchanges": ["binance", "okx"]
+    },
+    {
+      "name": "INJ/USDT",
+      "trade_quantity": 30.0,
+      "base_price": 5.71,
+      "liquidity_top_qty": 100.0,
+      "exchanges": ["binance", "okx"]
+    },
+    {
+      "name": "FET/USDT",
+      "trade_quantity": 1000.0,
+      "base_price": 0.17,
+      "liquidity_top_qty": 5000.0,
+      "exchanges": ["binance", "okx"]
+    },
+    {
+      "name": "OP/USDT",
+      "trade_quantity": 2000.0,
+      "base_price": 0.11,
+      "liquidity_top_qty": 10000.0,
+      "exchanges": ["binance", "okx"]
+    },
+    {
+      "name": "RENDER/USDT",
+      "trade_quantity": 100.0,
+      "base_price": 1.49,
+      "liquidity_top_qty": 500.0,
+      "exchanges": ["binance", "okx"]
+    },
+    {
+      "name": "SEI/USDT",
+      "trade_quantity": 5000.0,
+      "base_price": 0.047,
+      "liquidity_top_qty": 50000.0,
+      "exchanges": ["binance", "okx"]
+    },
+    {
+      "name": "ARB/USDT",
+      "trade_quantity": 3000.0,
+      "base_price": 0.097,
+      "liquidity_top_qty": 10000.0,
+      "exchanges": ["binance", "okx"]
+    },
+    {
+      "name": "PEPE/USDT",
+      "trade_quantity": 10000000.0,
+      "base_price": 0.00000365,
+      "liquidity_top_qty": 10000000.0,
+      "exchanges": ["binance", "okx", "mexc"]
+    },
+    {
+      "name": "SHIB/USDT",
+      "trade_quantity": 8000000.0,
+      "base_price": 0.00000514,
+      "liquidity_top_qty": 9000000.0,
+      "exchanges": ["binance", "okx", "mexc"]
+    }
+  ],
+  "wallets": {
+    "binance": {
+      "usdt": 200.0,
+      "base": { "BTC/USDT": 0.005, "ETH/USDT": 0.01 }
+    },
+    "okx": {
+      "usdt": 200.0,
+      "base": { "BTC/USDT": 0.005, "ETH/USDT": 0.01 }
+    }
+  }
+}

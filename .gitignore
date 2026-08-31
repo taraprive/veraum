@@ -1,0 +1,9 @@
+config/credentials.json
+build/
+logs/
+data/
+
+# root-level run logs
+*.log
+forward_signals.jsonl
+mt5_bars.jsonl
