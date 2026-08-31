@@ -242,10 +242,58 @@ def main():
             f"<td>{v['avg_r_resolved']:+.2f}R</td></tr>"
         )
 
+    # Built-in virality: a shareable "proof card" (SVG) + a copy-ready one-line
+    # summary of the verified track record, refreshed on every regen.
+    total_losses = total_resolved - total_wins
+    if total_resolved:
+        overall_wr = total_wins / total_resolved * 100
+        avg_r = sum(v["avg_r_resolved"] * (v["wins"] + v["losses"]) for v in summary.values()) / total_resolved
+        share_line = (
+            f"Verified live track record: {total_resolved} signals "
+            f"({total_wins}W / {total_losses}L), {overall_wr:.0f}% win rate, "
+            f"{avg_r:+.2f}R avg — hash-chained, verifiable. "
+            f"Not financial advice."
+        )
+        og_desc = (f"{total_resolved} signals resolved · {total_wins}W {total_losses}L · "
+                   f"{overall_wr:.0f}% win · {avg_r:+.2f}R avg — every win and loss, "
+                   f"hash-chained & verifiable.")
+    else:
+        share_line = "Aurum Signals — a live, verifiable gold/silver/Nasdaq signal track record. Wins and losses, on-chain."
+        og_desc = "Every signal, wins and losses, bound into a SHA-256 hash chain — independently verifiable. Not financial advice."
+
+    svg = (
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">'
+        f'<rect width="1200" height="630" fill="#0f172a"/>'
+        f'<text x="60" y="90" font-family="Arial" font-size="44" fill="#e2e8f0" font-weight="bold">Aurum Signals</text>'
+        f'<text x="60" y="140" font-family="Arial" font-size="26" fill="#94a3b8">Verified live track record</text>'
+        f'<text x="60" y="250" font-family="Arial" font-size="64" fill="#34d399" font-weight="bold">{total_wins} W</text>'
+        f'<text x="300" y="250" font-family="Arial" font-size="64" fill="#94a3b8">/</text>'
+        f'<text x="330" y="250" font-family="Arial" font-size="64" fill="#f87171" font-weight="bold">{total_losses} L</text>'
+    )
+    if total_resolved:
+        svg += (f'<text x="60" y="360" font-family="Arial" font-size="40" fill="#e2e8f0">'
+                f'{overall_wr:.0f}% win rate &#183; {avg_r:+.2f}R avg</text>')
+    svg += (
+        f'<text x="60" y="560" font-family="Arial" font-size="24" fill="#64748b">'
+        f'hash-chained &#183; independently verifiable &#183; not financial advice</text>'
+        f'<text x="60" y="600" font-family="monospace" font-size="20" fill="#475569">{chain_head[:24]}&#8230;</text>'
+        f'</svg>'
+    )
+    with open(os.path.join(a.out, "proof-summary.svg"), "w", encoding="utf-8") as f:
+        f.write(svg)
+
     html_doc = f"""<!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Aurum Signals — Verifiable Track Record</title>
+<meta property="og:title" content="Aurum Signals — Verifiable Track Record">
+<meta property="og:description" content="{esc(og_desc)}">
+<meta property="og:type" content="website">
+<meta property="og:image" content="proof-summary.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Aurum Signals — Verifiable Track Record">
+<meta name="twitter:description" content="{esc(og_desc)}">
+<meta name="twitter:image" content="proof-summary.svg">
 <style>
   body{{font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:900px;margin:2rem auto;padding:0 1rem;color:#1c1c1e;background:#fff}}
   h1{{font-size:1.5rem}} .ledger{{background:#f4f4f6;border:1px solid #ddd;padding:1rem;border-radius:8px;font-size:.9rem}}
@@ -254,7 +302,14 @@ def main():
   th,td{{border:1px solid #e0e0e0;padding:.4rem .5rem;text-align:left;font-size:.85rem}}
   th{{background:#fafafa}} tr.win td{{background:#e9f7ef}} tr.loss td{{background:#fdeeee}}
   tr.open td{{background:#fbf6ec}} .head{{font-size:.8rem;color:#555}}
+  .proof img{{max-width:100%;border:1px solid #ddd;border-radius:8px;margin-top:.5rem}}
+  .copy{{font-family:monospace;font-size:.8rem;background:#f4f4f6;padding:.5rem;border-radius:6px}}
 </style></head><body>
+<div class="proof">
+  <a href="proof-summary.svg"><img src="proof-summary.svg" alt="Aurum Signals verified track record"></a>
+  <p class="copy">{esc(share_line)}</p>
+  <p><small>Share this proof card, or download proof-summary.svg</small></p>
+</div>
 <h1>Aurum Signals&nbsp;&mdash; Verifiable Track Record</h1>
 <p>Every signal this engine emitted, wins and losses, bound into a SHA-256 hash
 chain so nothing can be edited or deleted retroactively. Download
