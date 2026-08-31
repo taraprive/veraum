@@ -3,7 +3,7 @@
 This is the honesty ledger (the product's moat): every directional signal that
 was actually emitted is shown, wins AND losses, and each entry is bound into a
 SHA-256 hash chain so nothing can be retroactively edited or deleted without
-breaking the chain. The page is fully static (index.html + trackrecord.json) so
+breaking the chain. The page is fully static (track.html + trackrecord.json) so
 it can be hosted for $0 on any static host (GitHub Pages, Cloudflare Pages...).
 
 Verification: anyone can re-download the raw journal + bars, re-run this exact
@@ -29,6 +29,10 @@ SIGNAL_RE = re.compile(r"SIGNAL\s+(\S+)\s+(LONG|SHORT)")
 ENTRY_RE = re.compile(r"entry\s+\$([0-9.]+)")
 STOP_RE = re.compile(r"stop\s+\$([0-9.]+)")
 TARGET_RE = re.compile(r"target\s+\$([0-9.]+)")
+
+# Landing-page CTA target. Filled when the Telegram channel/bot goes live.
+# Placeholder "#" until the user supplies the real channel link.
+TELEGRAM_URL = "#"
 
 
 def load_bars(path):
@@ -107,7 +111,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--signals", required=True)
     ap.add_argument("--bars", required=True)
-    ap.add_argument("--out", required=True, help="output directory for index.html + trackrecord.json")
+    ap.add_argument("--out", required=True, help="output directory for track.html + trackrecord.json + proof-summary.svg")
     a = ap.parse_args()
 
     bars = load_bars(a.bars)
@@ -305,6 +309,7 @@ def main():
   .proof img{{max-width:100%;border:1px solid #ddd;border-radius:8px;margin-top:.5rem}}
   .copy{{font-family:monospace;font-size:.8rem;background:#f4f4f6;padding:.5rem;border-radius:6px}}
 </style></head><body>
+<nav style="margin-bottom:1rem"><a href="index.html" style="color:#1c1c1e;text-decoration:none;font-weight:600">&larr; Aurum Signals</a></nav>
 <div class="proof">
   <a href="proof-summary.svg"><img src="proof-summary.svg" alt="Aurum Signals verified track record"></a>
   <p class="copy">{esc(share_line)}</p>
@@ -335,13 +340,89 @@ resolve stop-first on same-bar conflicts; entry at signal close. This is
 decision-support data, not financial advice. We never guarantee profit.</p>
 </body></html>"""
 
-    with open(os.path.join(a.out, "index.html"), "w", encoding="utf-8") as f:
+    with open(os.path.join(a.out, "track.html"), "w", encoding="utf-8") as f:
         f.write(html_doc)
+
+    _write_landing(a.out, total_resolved, total_wins, total_resolved - total_wins,
+                   overall_wr if total_resolved else 0.0,
+                   avg_r if total_resolved else 0.0,
+                   chain_head, summary)
 
     print("== track record ==")
     print(f"entries={len(entries)} resolved={total_resolved} wins={total_wins} "
           f"chain_head={chain_head}")
-    print(f"wrote {a.out}\\trackrecord.json and {a.out}\\index.html")
+    print(f"wrote {a.out}\\trackrecord.json, {a.out}\\track.html, {a.out}\\index.html")
+
+
+def _write_landing(out, n, wins, losses, wr, avg_r, chain_head, summary):
+    """Static $0 landing page (product root): CTA to Telegram + link to the
+    verifiable track record (the differentiation/trust moat)."""
+    def esc(x):
+        return html.escape(str(x))
+
+    if n:
+        stats = (f"{n} verified signals so far &#183; {wins}W / {losses}L &#183; "
+                 f"{wr:.0f}% win rate &#183; {avg_r:+.2f}R avg")
+        og_desc = (f"{n} signals resolved &#183; {wins}W {losses}L &#183; "
+                   f"{wr:.0f}% win &#183; every result hash-chained & verifiable.")
+    else:
+        stats = "Every signal, wins and losses, hash-chained & verifiable."
+        og_desc = ("Live gold/silver/Nasdaq signals with a fully transparent, "
+                   "hash-chained track record. Not financial advice.")
+
+    def _tg_link(label):
+        return f'<a class="btn" href="{esc(TELEGRAM_URL)}">{label}</a>' if TELEGRAM_URL != "#" \
+            else f'<span class="btn btn-off">{label} (channel pending)</span>'
+
+    cta = _tg_link("Join the free channel on Telegram")
+
+    doc = f"""<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aurum Signals — Transparent gold/silver/Nasdaq signals</title>
+<meta property="og:title" content="Aurum Signals — signals you can verify">
+<meta property="og:description" content="{esc(og_desc)}">
+<meta property="og:type" content="website">
+<meta property="og:image" content="proof-summary.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Aurum Signals">
+<meta name="twitter:description" content="{esc(og_desc)}">
+<meta name="twitter:image" content="proof-summary.svg">
+<style>
+  body{{font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:760px;margin:0 auto;padding:0 1rem;color:#1c1c1e;background:#fff;line-height:1.5}}
+  header{{padding:3rem 0 1rem}} .logo{{font-weight:700;font-size:1.2rem;letter-spacing:.5px}}
+  h1{{font-size:2.2rem;margin:.5rem 0}} p{{color:#444}}
+  .btn{{display:inline-block;background:#1c1c1e;color:#fff;padding:.8rem 1.4rem;border-radius:8px;text-decoration:none;font-weight:600;margin:.5rem .5rem .5rem 0}}
+  .btn-off{{background:#d1d1d6;color:#555;cursor:not-allowed}}
+  .btn.ghost{{background:#f4f4f6;color:#1c1c1e;border:1px solid #ddd}}
+  .stats{{font-family:monospace;font-size:.95rem;background:#f4f4f6;border:1px solid #ddd;padding:.8rem 1rem;border-radius:8px;margin:1rem 0;color:#1c1c1e}}
+  .feat{{margin:1.5rem 0}} .feat b{{display:block}}
+  .muted{{color:#777;font-size:.85rem}}
+</style></head><body>
+<header><div class="logo">Aurum Signals</div>
+<h1>Signals you can <u>verify</u>, not just trust.</h1>
+<p>Live gold (XAU), silver (XAG) and Nasdaq (NDX) trade signals &mdash; every one
+carrying entry, stop, target and lot size, with its reason. Every signal we emit,
+<strong>win or loss</strong>, is published into a tamper-evident SHA-256 chain you
+can audit yourself.</p>
+<div class="stats">{stats} &#183; <a href="track.html" style="color:#1c1c1e">see the ledger &rarr;</a></div>
+<h2>Why this is different</h2>
+<div class="feat"><b>1. A track record you can check, not a screenshot.</b>
+Anyone can photoshop a P&amp;L. We bind every signal into a hash chain &mdash;
+re-download the raw data and re-run our tool; if so much as one stop was edited,
+the chain breaks.</div>
+<div class="feat"><b>2. Losses published as openly as wins.</b>
+No cherry-picking. Honesty is the product.</div>
+<div class="feat"><b>3. No paid hype feed.</b>
+Free while we prove out the record. A premium tier via Telegram Stars may follow.</div>
+{cta}
+<div class="feat muted">
+<h3 style="color:#777;margin-bottom:.25rem">Not financial advice.</h3>
+Trade decisions are yours. We never guarantee profit; losses are part of the
+published record. For ongoing updates, follow the channel (free).</div>
+</body></html>"""
+    with open(os.path.join(out, "index.html"), "w", encoding="utf-8") as f:
+        f.write(doc)
 
 
 if __name__ == "__main__":
