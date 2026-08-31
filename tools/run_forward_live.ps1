@@ -67,12 +67,19 @@ $cfg.ops.log_file = "forward.log"
 $cfg.ops.state_file = "forward_balances.json"
 $cfg.signals.jsonl = "forward_signals.jsonl"
 # This session is for the directional (gold/silver/nasdaq) signal service.
-# Silence the legacy crypto arbitrage flood so the journal shows only
-# directional signals: raw directional delivery is not gated by this field.
+# Strip the legacy crypto arbitrage machinery entirely (symbols + triangles),
+# so the bot runs as a pure directional signal engine: no crypto feeds, no
+# ARBITRAGE/skip log flood, no arb signals in the journal. The MT5 bridge still
+# drives the directional engines, and raw directional delivery is unaffected.
+$cfg.symbols = @()
+$cfg.triangles = @()
 $cfg.signals.min_net_spread = 1.0
 $cfg | ConvertTo-Json -Depth 20 | Set-Content (Join-Path $fwd "config.json") -Encoding utf8
 
-Copy-Item (Join-Path $fwd "..\tryrun\exchanges.json") $fwd -Force -ErrorAction SilentlyContinue
+# The directional service needs no crypto connectivity: write an empty
+# exchanges file so no exchange adapters, watchdog sweeps or balance recovery
+# run (keeps the log clean; the MT5 bridge feeds the directional engines).
+'{ "exchanges": [] }' | Set-Content (Join-Path $fwd "exchanges.json") -Encoding ascii
 Copy-Item (Join-Path $fwd "..\tryrun\credentials.json") $fwd -Force -ErrorAction SilentlyContinue
 if (-not (Test-Path $feedFile)) { New-Item -ItemType File -Path $feedFile | Out-Null }
 

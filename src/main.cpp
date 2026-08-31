@@ -323,10 +323,15 @@ public:
 
             active_ = std::move(next);
 
-            log.info("allocator", "capital=$" + std::to_string(availableUsdt) +
-                                      " active=[" + join(active_) + "]" +
-                                      (changes.empty() ? "" : " changes:" + changes) +
-                                      " ranking[" + rankLine + "]");
+            // In a purely directional session (no crypto symbols configured)
+            // the allocator has nothing to plan; keep the log silent so it does
+            // not bury the directional signal evidence.
+            if (!ranked.empty()) {
+                log.info("allocator", "capital=$" + std::to_string(availableUsdt) +
+                                          " active=[" + join(active_) + "]" +
+                                          (changes.empty() ? "" : " changes:" + changes) +
+                                          " ranking[" + rankLine + "]");
+            }
         }
     }
 
